@@ -4,6 +4,8 @@ var rows = 20
 var cols = 20
 var border
 var context
+var score = 0
+
 
 // Snake Head (x and y refers to X and Y cordenat the || snake will starts at cordenate 5,5 )
 var snakeX = blockSize * 5
@@ -17,6 +19,10 @@ var snakeBody = []
 // Food 
 var foodX  
 var foodY  
+
+// set interval
+// var interval = setInterval(draw, 10);
+
 
 // Game over variable
 var gameOver = false
@@ -34,23 +40,29 @@ window.onload = function() {
     setInterval(update, 1000/10) // Set Interval every 100 milliSecound will run the update  function
 }
 
-function update() {
-    if (gameOver) {
-        return;
-    }
-}
+// function update() {
+//     if (gameOver) {
+
+//     }else {
+//         return
+//     }
+// }
+
 //starting from the corner of the page (width 500 height 500)/25*20 = 500
 function update() {
-    context.fillStyle = "black"
+    context.fillStyle = "black" 
     context.fillRect(0, 0, border.width, border.height)
-    context.border = "1px white"
+    
 
     // Food drawing Staring with the cordenate , then width and height
     context.fillStyle = "Red"
     context.fillRect (foodX , foodY , blockSize , blockSize ) 
-
+    
     // To let the Snake consume the Food 
     if (snakeX == foodX && snakeY == foodY) {
+         drawScore(); 
+        score++;
+        
         snakeBody.push([foodX , foodY]) // After eating the food let the snake grow
         placeFood()
     }
@@ -61,7 +73,7 @@ function update() {
     if (snakeBody.length) {
         snakeBody[0] = [snakeX , snakeY]
     }
-// Snake drawing Staring with the cordenate , then width and height
+    // Snake drawing Staring with the cordenate , then width and height
     context.fillStyle = "lime"
     snakeX += velocityX * blockSize
     snakeY += velocityY * blockSize
@@ -76,14 +88,28 @@ function update() {
     if (snakeX < 0 || snakeX > cols*blockSize || snakeY < 0 || snakeY > rows*blockSize) {
         gameOver = true
         alert("Game Over")
+        return
     }
     // If the snake hit it's body alert Game over
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true
             alert("Game Over")
+            return
         }
     }
+// Score system
+    context.font = "20px Arial";
+    context.fillStyle = "white";
+    context.fillText("Score: ", 5, 25);
+
+    function drawScore() {
+        context.font = "20px Arial";
+        context.fillStyle = "red";
+        context.fillText(score,  75, 25);
+        
+            }
+            drawScore();   
 }
 // change Diraction if you priss arrow key it will call Change Diraction
 function changeDirection(event) {
@@ -111,4 +137,17 @@ function changeDirection(event) {
 function placeFood() {
     foodX = Math.floor(Math.random() * cols) * blockSize
     foodY = Math.floor(Math.random() * rows) * blockSize
+    
 }
+
+// context.font = "20px Arial";
+// context.fillStyle = "blue";
+// context.fillText("Score: ", 5, 20);
+
+// function drawScore() {
+//     context.font = "20px Arial";
+//     context.fillStyle = "red";
+//     context.filltext(score,  75, 20);
+
+//         }
+// drawScore();

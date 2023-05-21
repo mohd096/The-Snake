@@ -1,14 +1,15 @@
 body {
     font-family:'Courier New', Courier, monospace ;
     text-align: center;
-    color: rgb(0, 255, 0);
+    background: linear-gradient(90deg, #5bf04e, #3FEEE6,  #017ff5);
 }
 #border {
     
     border: 4px solid rgb(255, 0, 0);
 
 }
-
-
-    
+img {
+    padding-right:80px ;
+}
+  
     

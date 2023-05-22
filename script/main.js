@@ -1,7 +1,7 @@
 //border 
 var blockSize = 25
-var rows = 20
-var cols = 20
+var rows = 24
+var cols = 36
 var border
 var context
 var score = 0
@@ -27,19 +27,35 @@ var foodY
 // Game over variable
 var gameOver = false
 
-//When the pages loads
-window.onload = function() {
+
+
+function gameLoop() {
     border = document.getElementById("border")
     border.height = rows * blockSize
     border.width = cols * blockSize
     context = border.getContext("2d") //Used For Drawing on The Border
 
     placeFood()
-    document.addEventListener("keyup",changeDirection)
+    document.addEventListener("keyup",onKeyDown)
     // update()
     setInterval(update, 1000/10) // Set Interval every 100 milliSecound will run the update  function
 }
+//When the pages loads
+// window.onload =() => {
+//     gameLoop()
+// }
 
+function startGame() {
+    console.log("start Game")
+    toggleScreen("start-screen" , false)
+    toggleScreen("border" , true)
+    gameLoop()
+}
+function toggleScreen(id, toggle) {
+    let element = document.getElementById(id)
+    let display = (toggle) ? "block" : "none"
+    element.style.display = display
+}
 // function update() {
 //     if (gameOver) {
 
@@ -119,29 +135,107 @@ function update() {
 }
 // change Diraction if you priss arrow key it will call Change Diraction       
 
-function changeDirection(event) {
-    if (event.code == "ArrowUp" && velocityY !=1) { // To prevent the snake from going backword !=
-        velocityX = 0
-        velocityY = -1
-        console.log("arrowUp");
+
+
+  
+   class CooldownTimer {
+    constructor(time) {
+      this.cooldownTimeout = null
+      this.cooldownTime = time
+      this.startedAt = null
     }
-    else if (event.code == "ArrowDown" && velocityY !=-1) {
-        velocityX = 0
-        velocityY = 1
-        console.log("arrowDown");
+    
+  
+    isReady = () => {
+      return !this.cooldownTimeout
     }
-    if (event.code == "ArrowLeft" && velocityX !=1) {
+  
+    start = () => {
+      if (!this.cooldownTimeout) {
+        clearTimeout(this.cooldownTimeout)
+      }
+  
+      this.startedAt = Date.now()
+      this.cooldownTimeout = setTimeout(() => {
+        this.cooldownTimeout = null
+      }, this.cooldownTime)
+    }
+  }
+  
+  
+    async function onKeyDown(event){
+        // let keyPressCooldown = new CooldownTimer(3000)
+        // if (keyPressCooldown.isReady()) {
+            
+        //     keyPressCooldown.start() // Do not forget to start the cooldown here
+            
+        // }
+          
+        if (event.keyCode == 37 && velocityX !=1|| event.keyCode == 65 && velocityX !=1)
+        {
         velocityX = -1
         velocityY = 0
         console.log("arrowLeft");
-    }
-    if (event.code == "ArrowRight" && velocityX !=-1) {
+        } 
+        else if (event.keyCode == 38 && velocityY !=1 || event.keyCode == 87 && velocityY !=1) 
+        {
+        velocityX = 0
+        velocityY = -1
+        console.log("arrowUp");
+        } 
+        else if (event.keyCode == 39 && velocityX !=-1 || event.keyCode == 68 && velocityX !=-1) 
+        {
         velocityX = 1
         velocityY = 0
         console.log("arrowRight");
+        } 
+        else if (event.keyCode == 40 && velocityY !=-1 || event.keyCode == 83 && velocityY !=-1) 
+        {
+        velocityX = 0
+        velocityY = 1
+        console.log("arrowDown");
+        }  
+        await sleep(3000)
+        
+    } 
+    
+    
+
+async function sleep(ms) {
+    console.log("Sleeping")
+    return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-}
+
+  
+
+// function changeDirection(event) {
+    
+//     if (event.code === "ArrowUp" && velocityY !=1) { // To prevent the snake from going backword !=
+//         velocityX = 0
+//         velocityY = -1
+//         console.log("arrowUp");
+//     }
+//     else if (event.code === "ArrowDown" && velocityY !=-1) {
+//         velocityX = 0
+//         velocityY = 1
+//         console.log("arrowDown");
+//     }
+//     if (event.code === "ArrowLeft" && velocityX !=1) {
+//         velocityX = -1
+//         velocityY = 0
+//         console.log("arrowLeft");
+//     }
+//     if (event.code === "ArrowRight" && velocityX !=-1) {
+//         velocityX = 1
+//         velocityY = 0
+//         console.log("arrowRight");
+//     } 
+    
+
+// }
+
+
 
 
 // To move the food in a random cordinate
@@ -190,3 +284,12 @@ function placeFood() {
 //     }
 // });
 
+async function delayedGreeting() {
+    console.log("Hello");
+    await sleep(2000);
+    console.log("World!");
+    await sleep(2000);
+    console.log("Goodbye!");
+  }
+  
+  delayedGreeting();

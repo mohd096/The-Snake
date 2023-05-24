@@ -6,11 +6,10 @@ var border
 var context
 var score = 0
 
-
 // Snake Head (x and y refers to X and Y cordenat the || snake will starts at cordenate 5,5 )
 var snakeX = blockSize * 5
 var snakeY = blockSize * 5
-
+// cordinats
 var velocityX = 0
 var velocityY = 0
 
@@ -19,18 +18,14 @@ var snakeBody = []
 // Food 
 var foodX  
 var foodY  
-
+// bounce apple variable
 var bounceAppleX 
 var bounceAppleY 
-
-// set interval
-// var interval = setInterval(draw, 10);
-
 
 // Game over variable
 var gameOver = false
 
-//  set interval
+//  set interval (Game Speed)
 var interval = 200
 var intervalId
 
@@ -46,11 +41,7 @@ function gameLoop() {
     // update()
     setInterval(update , interval) // Set Interval every 200 milliSecound will run the update  function
 }
-//When the pages loads
-// window.onload =() => {
-//     gameLoop()
-// }
-
+//When the pages loads (start page)
 function startGame() {
     console.log("start Game")
     toggleScreen("start-screen" , false)
@@ -62,7 +53,6 @@ function toggleScreen(id, toggle) {
     let display = (toggle) ? "block" : "none"
     element.style.display = display
 }
-
 
 //starting from the corner of the page (width 900 height 600)/25*36 = 900 x 25*24=600
 async function update() {
@@ -93,10 +83,8 @@ async function update() {
     // bounce apple condition ( when its reachs the scores minstions the yellow apple will apper {else will gone})
     if ((score === 5) || (score === 10) || (score === 15)) {
         placeBounce('inside')
-        // console.log(placeBounce);
     
     if (snakeX == bounceAppleX && snakeY == bounceAppleY) {
-        // console.log("EQUAL")
         
 
          drawScore();  // to add score each time the snake consume the food
@@ -108,15 +96,11 @@ async function update() {
        // After eating the food let the snake grow
         
         snakeBody.push([bounceAppleX, bounceAppleY]) 
-
-     
     }
 } else {
     placeBounce('outside')
 }
-
-        
-    
+// wining condition
     if ((score >= 30) && gameOver == false){
     gameOver = true    
     alert ("you Win")
@@ -148,7 +132,6 @@ async function update() {
         loses[0].play()
         console.log('lose')
         await sleep(200)
-        console.log("gameover")
         alert("Game Over")
         
 
@@ -160,7 +143,6 @@ async function update() {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true
             loses[0].play() 
-            console.log('lose')
             await sleep(200)
             alert("Game Over")
             
@@ -182,32 +164,7 @@ async function update() {
             }
             drawScore();   
 }
-   
-  
-//    class CooldownTimer {
-//     constructor(time) {
-//       this.cooldownTimeout = null
-//       this.cooldownTime = time
-//       this.startedAt = null
-//     }
-    
-  
-//     isReady = () => {
-//       return !this.cooldownTimeout
-//     }
-  
-//     start = () => {
-//       if (!this.cooldownTimeout) {
-//         clearTimeout(this.cooldownTimeout)
-//       }
-  
-//       this.startedAt = Date.now()
-//       this.cooldownTimeout = setTimeout(() => {
-//         this.cooldownTimeout = null
-//       }, this.cooldownTime)
-//     }
-//   }
-  
+     
   // change Diraction if you priss arrow key it will call Change Diraction  + added timing to prevent double key pressed
     async function onKeyDown(event){
               
@@ -216,67 +173,31 @@ async function update() {
         await sleep(100) 
         velocityX = -1
         velocityY = 0
-        
-        console.log("arrowLeft");
-        
         } 
         else if (event.keyCode == 38 && velocityY !=1 || event.keyCode == 87 && velocityY !=1) 
         { 
         await sleep(100)
         velocityX = 0
         velocityY = -1
-        console.log("arrowUp");
         } 
         else if (event.keyCode == 39 && velocityX !=-1 || event.keyCode == 68 && velocityX !=-1) 
         { 
         await sleep(100)
         velocityX = 1
         velocityY = 0
-        console.log("arrowRight");
         } 
         else if (event.keyCode == 40 && velocityY !=-1 || event.keyCode == 83 && velocityY !=-1) 
         { 
         await sleep(100)
         velocityX = 0
         velocityY = 1
-        console.log("arrowDown");
         }  
                
     } 
     
     async function sleep(ms) {
-        console.log("Sleeping")
         return new Promise(resolve => setTimeout(resolve, ms));
       }
-
-
-  
-
-//  function changeDirection(event) {
-    
-//     if (event.code === "ArrowUp" && velocityY !=1) { // To prevent the snake from going backword !=
-//         velocityX = 0
-//         velocityY = -1
-//         console.log("arrowUp");
-        
-//     }
-//     else if (event.code === "ArrowDown" && velocityY !=-1) {
-//         velocityX = 0
-//         velocityY = 1
-//         console.log("arrowDown");
-//     }
-//     if (event.code === "ArrowLeft" && velocityX !=1) {
-//         velocityX = -1
-//         velocityY = 0
-//         console.log("arrowLeft");
-//     }
-//     if (event.code === "ArrowRight" && velocityX !=-1) {
-//         velocityX = 1
-//         velocityY = 0
-//         console.log("arrowRight");
-//     } 
-    
-// }
 
 // To move the food in a random cordinate
 // Math.random is like this , return a number between (0-1)  multiplay by cols -> (0-19.9999) -> (0-19) multiply by blockSize * 25 
@@ -302,86 +223,10 @@ function placeBounce(position) {
     }
 }
 
-
-
-
-
-// function placeBounce() {
-
-//     bounceAppleX = Math.floor(Math.random() * cols) * blockSize
-//     bounceAppleY = Math.floor(Math.random() * rows) * blockSize
-
-//    }
-
-
-// $(function () {
-  
-// var i = setTimeout("placeBounce()" ,200);
-// console.log("come")
-// setTimeout(function(){clearTimeout(i)},2000);
-// console.log("gone")
-
-// });
-
-// window.setTimeout(placeBounce,3000)
-
-
-
-
-
-// $(document).keydown(function(e) {
-//     if (e.keyCode in map) {
-//         map[e.keyCode] = true;
-//          if((map[37] && !map[38] && !map[39] && !map[40]) ||
-//             (!map[37] && map[38] && !map[39] && !map[40]) ||
-//             (!map[37] && !map[38] && map[39] && !map[40]) ||
-//             (!map[37] && !map[38] && !map[39] && map[40])) {
-//             if ((map[37]) && velocityX !=1) {
-//                 velocityX = -1
-//                 velocityY = 0
-//                 console.log("arrowLeft");
-//             } else if ((map[38]) && velocityY !=1) { 
-//                         velocityX = 0
-//                         velocityY = -1
-//                         console.log("arrowUp");
-//             } else if ((map[39])&& velocityX !=-1) {
-//                 velocityX = 1
-//                 velocityY = 0
-//                 console.log("arrowRight");
-//             } else if ((map[40]) && velocityY !=-1) {
-//                         velocityX = 0
-//                         velocityY = 1
-//                         console.log("arrowDown");
-//                     }
-//             }
-//         }
-//     }
-// ).keyup(function(e) {
-//     if (e.keyCode in map) {
-//         map[e.keyCode] = false;
-//     }
-// });
-
-
-
-// async function delayedGreeting() {
-//   console.log("Hello");
-//   await sleep(2000);
-//   console.log("World!");
-//   await sleep(2000);
-//   console.log("Goodbye!");
-// }
-
-// delayedGreeting();
-
-
-
-
 // store in a function so we can call it again
 function startInterval(_interval) {
   
   intervalId = setInterval(function() {
-    console.log(_interval);
   }, _interval);
 }
 
@@ -398,7 +243,6 @@ $('#easy').on('click', function() {
     clearInterval(intervalId);
     // just start a new one
     startInterval(interval);
-    console.log(interval)
 })
     $('#medium').on('click', function() {
     this.style.borderStyle = (this.style.borderStyle!=='inset' ? 'inset' : 'outset'); 
@@ -407,7 +251,6 @@ $('#easy').on('click', function() {
     clearInterval(intervalId);
     // just start a new one
     startInterval(interval);
-    console.log(interval)
 })
 $('#hard').on('click', function() {
     this.style.borderStyle = (this.style.borderStyle!=='inset' ? 'inset' : 'outset'); 
@@ -416,5 +259,4 @@ $('#hard').on('click', function() {
     clearInterval(intervalId);
     // just start a new one
     startInterval(interval);
-    console.log(interval)
 })

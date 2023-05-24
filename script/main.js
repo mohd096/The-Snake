@@ -73,6 +73,7 @@ function toggleScreen(id, toggle) {
 async function update() {
     const sounds = document.querySelectorAll(".sound")
     const loses = document.querySelectorAll(".lose")
+    const bounce = document.querySelectorAll(".bounce")
     context.fillStyle = "black" 
     context.fillRect(0, 0, border.width, border.height)
     
@@ -95,7 +96,7 @@ async function update() {
         placeFood()
     }
     
-    if ((score === 5) || (score === 10)) {
+    if ((score === 5) || (score === 10) || (score === 15)) {
         placeBounce()
         // console.log(placeBounce);
     
@@ -106,14 +107,14 @@ async function update() {
          drawScore();  // to add score each time the snake consume the food
         score +=3
         snakeBody.length +=3
-        sounds[0].play()
+        bounce[0].play()
         
         
        // After eating the food let the snake grow
         
         snakeBody.push([bounceAppleX, bounceAppleY]) 
 
-        return 
+     
     }
 }
 

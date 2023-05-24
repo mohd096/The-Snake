@@ -34,6 +34,7 @@ var gameOver = false
 var interval = 200
 var intervalId
 
+// Game Loop , border condition and what will apear in start page 
 function gameLoop() {
     border = document.getElementById("border")
     border.height = rows * blockSize
@@ -43,7 +44,7 @@ function gameLoop() {
     placeFood()
     document.addEventListener("keyup",onKeyDown)
     // update()
-    setInterval(update , interval) // Set Interval every 100 milliSecound will run the update  function
+    setInterval(update , interval) // Set Interval every 200 milliSecound will run the update  function
 }
 //When the pages loads
 // window.onload =() => {
@@ -61,13 +62,7 @@ function toggleScreen(id, toggle) {
     let display = (toggle) ? "block" : "none"
     element.style.display = display
 }
-// function update() {
-//     if (gameOver) {
 
-//     }else {
-//         return
-//     }
-// }
 
 //starting from the corner of the page (width 900 height 600)/25*36 = 900 x 25*24=600
 async function update() {
@@ -95,7 +90,7 @@ async function update() {
         snakeBody.push([foodX , foodY]) 
         placeFood()
     }
-    
+    // bounce apple condition ( when its reachs the scores minstions the yellow apple will apper {else will gone})
     if ((score === 5) || (score === 10) || (score === 15)) {
         placeBounce('inside')
         // console.log(placeBounce);
@@ -106,7 +101,7 @@ async function update() {
 
          drawScore();  // to add score each time the snake consume the food
         score +=3
-        snakeBody.length +=3
+        snakeBody.length +=3 
         bounce[0].play()
         
         
@@ -187,10 +182,7 @@ async function update() {
             }
             drawScore();   
 }
-// change Diraction if you priss arrow key it will call Change Diraction       
-
-
-
+   
   
 //    class CooldownTimer {
 //     constructor(time) {
@@ -216,15 +208,9 @@ async function update() {
 //     }
 //   }
   
-  
+  // change Diraction if you priss arrow key it will call Change Diraction  + added timing to prevent double key pressed
     async function onKeyDown(event){
-        // let keyPressCooldown = new CooldownTimer(2000)
-        // if (keyPressCooldown.isReady()) {
-            
-        //     keyPressCooldown.start() // Do not forget to start the cooldown here
-            
-        // }
-          
+              
         if (event.keyCode == 37 && velocityX !=1|| event.keyCode == 65 && velocityX !=1)
         {
         await sleep(100) 
@@ -255,12 +241,9 @@ async function update() {
         velocityY = 1
         console.log("arrowDown");
         }  
-        
-        
+               
     } 
     
-    
-
     async function sleep(ms) {
         console.log("Sleeping")
         return new Promise(resolve => setTimeout(resolve, ms));
@@ -301,6 +284,8 @@ function placeFood() {
     foodX = Math.floor(Math.random() * cols) * blockSize
     foodY = Math.floor(Math.random() * rows) * blockSize
 }
+
+// bounce Apple position 
 function placeBounce(position) {
     if(position === 'inside'){
   bounceAppleX = rows * blockSize
@@ -394,7 +379,7 @@ function placeBounce(position) {
 
 // store in a function so we can call it again
 function startInterval(_interval) {
-  // Store the id of the interval so we can clear it later
+  
   intervalId = setInterval(function() {
     console.log(_interval);
   }, _interval);
@@ -405,7 +390,7 @@ function getInterval() {
   return interval;
 }
 
-
+// Start Page Difecality Buttons Each Button Got Deffrent Interval Speed
 $('#easy').on('click', function() {
     this.style.borderStyle = (this.style.borderStyle!=='inset' ? 'inset' : 'outset'); 
     interval = 200 ;

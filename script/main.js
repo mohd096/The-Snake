@@ -97,7 +97,7 @@ async function update() {
     }
     
     if ((score === 5) || (score === 10) || (score === 15)) {
-        placeBounce()
+        placeBounce('inside')
         // console.log(placeBounce);
     
     if (snakeX == bounceAppleX && snakeY == bounceAppleY) {
@@ -116,6 +116,8 @@ async function update() {
 
      
     }
+} else {
+    placeBounce('outside')
 }
 
         
@@ -299,12 +301,22 @@ function placeFood() {
     foodX = Math.floor(Math.random() * cols) * blockSize
     foodY = Math.floor(Math.random() * rows) * blockSize
 }
-function placeBounce() {
+function placeBounce(position) {
+    if(position === 'inside'){
   bounceAppleX = rows * blockSize
   bounceAppleY = cols * blockSize
   bounceAppleX = 9 * blockSize
   bounceAppleY = 15 * blockSize
+    }
+    
+        if (position === 'outside') {
+        bounceAppleX = rows * blockSize
+        bounceAppleY = cols * blockSize
+        bounceAppleX =  950 * blockSize
+        bounceAppleY =  950 * blockSize
+    }
 }
+
 
 
 

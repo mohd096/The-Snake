@@ -10,12 +10,24 @@
 <body>
 <div id="start-screen">
     <!-- <img class="logo" src="./images/hytale-hytale-game.gif " width="300" alt="Snake"> -->
-    <img src="./images/Snake-background.png" alt="Snake-background">
-<button onclick="startGame()">Let's play</button>
+    <img src="./images/Snake-logo.png" alt="Snake-background">
+    <div >
+        <button id="startButton" onclick="startGame()">Let's play</button>
+        <div id = "difficulty">
+            <h4>Chose Difficulty</h4>
+        <button id="easy">Easy</button>
+        <button id="medium">Medium</button>
+        <button id="hard">Hard</button>
+   
+        </div>
+
+    </div>
+
 </div>
 
     <div>
         <audio class="sound" src="./sound/20279__koops__apple_crunch_16.wav"></audio>
+        <audio class="lose" src="./sound/mixkit-losing-piano-2024.wav"></audio>
     </div>
     <div>
         

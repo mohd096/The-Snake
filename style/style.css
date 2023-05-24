@@ -36,14 +36,14 @@ img {
     background-color: #55982142;
 
 }
-#start-screen button {
+#startButton{
     position:absolute;
     width: 200px;
     height: 50px;
     left: 50%;
     top: 50%;
     transform: translate(-50% , -50%); 
-    background-color:#02ff02b0;
+    background-color:#02ff0294;
     color: #000000d5;
     font-size: 20px;
     font-family:Georgia, 'Times New Roman', Times, serif;
@@ -51,10 +51,69 @@ img {
 
 }
 
-#start-screen button:hover {
+#startButton:hover {
     width: 210px;
     height: 55px;
     background-color:#e42822;
+}
+
+#difficulty{
+    position:absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50% , -50%); 
+    color: #080707b2;
+    font-size: 20px;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+
+}
+#easy{
+    width: 70px;
+    height: 30px;
+    background-color:#eeeeee;
+    border: 2px solid black;
+    font-size: 13px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+
+}
+#medium{
+    width: 70px;
+    height: 30px;
+    background-color:#eeeeee;
+    border: 2px solid black;    font-size: 13px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+
+
+}
+#hard{
+    width: 70px;
+    height: 30px;
+    background-color:#eeeeee;
+    border: 2px solid black;    font-size: 13px;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+
+
+}
+
+#easy:hover {
+    width: 65px;
+    height: 25px;
+    background-color:#00ff22;
+
+}
+#medium:hover{
+    width: 65px;
+    height: 25px;
+    background-color:#fbff00;
+
+}
+#hard:hover{
+    width: 65px;
+    height: 25px;
+    background-color:#ff0000;
+
 }
 
   

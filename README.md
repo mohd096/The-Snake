@@ -20,6 +20,9 @@ https://trello.com/b/ZvNhg601/project01
 ### Game Screen
 <img src="./images/game-screen.png"></img>
 
+### X & Y Cordinates For The Canvas
+<img src ="./images/snake-exp.png"></img>
+
 #### Game Simple Logic 
 ```javascript
 //border 

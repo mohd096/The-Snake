@@ -11,6 +11,9 @@ step in the game, there is always an apple somewhere on the board. If the snake 
 apple, the snake becomes one cell longer per step, for 3 steps. A new apple bounce is placed on
 a random location. 
 
+## Game Link
+https://pages.git.generalassemb.ly/mohd96/Project01/
+
 ## Trello Link 
 https://trello.com/b/ZvNhg601/project01
 
